@@ -1,28 +1,41 @@
 const fetch = require("node-fetch");
-const express = require("express");
-const app = express();
 
-app.get('/api', (req, res) => {
-    
-    const getGithubCommitCount = async () => {
-        const resp = await fetch("https://api.github.com/users/watataku8911/events")
-        const data = await resp.json()
-        return data
-    }
+const Twitter = require("twitter");
 
-    getGithubCommitCount().then((resp) => {
-        for(let i = 0; i < resp.length; i++) {
-            // if(resp[i].created_at == "") {
+const getCustomerKey = require("./seacretDirectory/customerKey");
+const getCustomerSeacret = require("./seacretDirectory/customerSeacret");
+const getAccsessToken = require("./seacretDirectory/accsessTokenKey");
+const getAccsessTokenSeacret = require("./seacretDirectory/accsessTorknSeacret");
 
-            // }
-            //res.json(resp[i].created_at)
-            console.log(resp[i].created_at);
-        }
-    })
+// const getGithubCommitCount = async () => {
+//   const resp = await fetch("https://api.github.com/users/watataku8911/events");
+//   const data = await resp.json();
+//   return data;
+// };
+
+// getGithubCommitCount().then((resp) => {
+//   for (let i = 0; i < resp.length; i++) {
+//     // if(resp[i].created_at == "") {
+
+//     // }
+//     console.log(resp[i].created_at);
+//   }
+// });
+let client = new Twitter({
+  consumer_key: getCustomerKey(),
+  consumer_secret: getCustomerSeacret(),
+  access_token_key: getAccsessToken(),
+  access_token_secret: getAccsessTokenSeacret(),
 });
 
-const port = process.env.PORT || 3080;
-app.listen(port);
-console.log("ポート番号" + port + "でWebサーバが立ち上がりました");
+const params = {
+  status: "テストです。\n",
+};
 
- 
+client.post("statuses/update", params, (error, tweet) => {
+  if (!error) {
+    console.log("ツイートしました。", tweet);
+  } else {
+    console.log("エラー", error);
+  }
+});
