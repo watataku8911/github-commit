@@ -22,9 +22,11 @@ const getGithubCommitCount = async () => {
   return data;
 };
 
+// 昨日の日付を取得
 const stringToday = () => {
   const today = new Date();
 
+  today.setDate(today.getDate() - 1);
   const year = today.getFullYear();
   const month = ("0" + (today.getMonth() + 1)).slice(-2);
   const day = ("0" + today.getDate()).slice(-2);
