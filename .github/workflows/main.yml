@@ -1,0 +1,22 @@
+name: AutoGrass
+
+# 起動条件
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 0 * *' # 日本時間午前九時に毎日実行
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # こっから書いていく
+    steps:
+      
+      # 実行
+      - name: Execution
+        run: node-dev index.js
+   
