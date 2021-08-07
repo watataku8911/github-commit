@@ -1,6 +1,10 @@
 "use strict";
+const express = require("express");
+const app = express();
 
-const cron = require("node-cron");
+const cors = require("cors");
+app.use(cors());
+
 const fetch = require("node-fetch");
 const Twitter = require("twitter");
 
@@ -34,8 +38,12 @@ const stringToday = () => {
   return year + "-" + month + "-" + day;
 };
 
-// 24時に実行
-cron.schedule("0 0 0 * * *", () => {
+//get
+app.get("/api", (req, res) => {
+  res.json({ message: "Bad Request" });
+});
+
+app.post("/api", (req, res) => {
   getGithubCommitCount()
     .then((resp) => {
       let count = 0;
@@ -64,3 +72,15 @@ cron.schedule("0 0 0 * * *", () => {
       console.log("Githubデータを取得できませんでした。");
     });
 });
+
+app.put("/api", (req, res) => {
+  res.json({ message: "Bad Request" });
+});
+
+app.delete("/api", (req, res) => {
+  res.json({ message: "Bad Request" });
+});
+
+const port = process.env.PORT || 3080;
+app.listen(port);
+console.log("ポート番号" + port + "でWebサーバが立ち上がりました");
