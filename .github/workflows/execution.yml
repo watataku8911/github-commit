@@ -18,6 +18,6 @@ jobs:
       
       # 実行
       - name: Execution
-        run: curl -X POST -H "Content-Type: application/json" -d  https://github-commiter.herokuapp.com/api
+        run: curl -XPOST  https://github-commiter.herokuapp.com/api
 
    
