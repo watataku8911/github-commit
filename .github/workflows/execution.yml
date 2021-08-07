@@ -1,10 +1,10 @@
-name: Eexecution
+name: Execution
 
 # 起動条件
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *' # 日本時間午前0時に毎日実行
+    - cron: '0 3 * * *' # 日本時間午前9時に毎日実行
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -18,5 +18,6 @@ jobs:
       
       # 実行
       - name: Execution
-        run: node index.js
+        run: curl -X POST -H "Content-Type: application/json" -d  https://github-commiter.herokuapp.com/api
+
    
