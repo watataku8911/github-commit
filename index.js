@@ -50,6 +50,8 @@ app.post("/api", (req, res) => {
       for (let i = 0; i < resp.length; i++) {
         if (resp[i].created_at.substr(0, 10) == stringToday()) {
           count++;
+        } else {
+          break;
         }
       }
       const params = {
