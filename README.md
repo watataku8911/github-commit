@@ -10,5 +10,7 @@ $ touch index.js
 ## package
 
 ```
-$ npm install node-dev node-fetch node-cron twitter
+$ npm install node-dev node-fetch twitter
 ```
+
+※node-devは好みなので別になくてもいい。
